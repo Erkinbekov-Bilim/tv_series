@@ -1,0 +1,55 @@
+.show-block {
+  margin: 0 auto;
+  width: calc(var(--app-width) - 200px);
+  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.show {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.show-image {
+  width: 222px;
+  height: 333px;
+}
+
+.show-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.show-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.about-show {
+  margin-top: 30px;
+}
+
+.about-show-info {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-show-title {
+  font-weight: 600;
+}
+
+.about-show-label {
+  color: rgb(119, 119, 119);
+}
+
+.about-show-labels {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

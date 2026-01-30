@@ -1,0 +1,24 @@
+.form-block {
+  position: relative;
+  width: calc(var(--app-width) - 150px);
+  margin: 5% auto 0;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-block > input {
+  width: 100%;
+  border-radius: var(--border-radius-md);
+  padding: calc(var(--padding-y-x-xs) + 5px);
+  border: 1px solid var(--color-border-input);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.input-block > input::placeholder {
+  text-transform: uppercase;
+}

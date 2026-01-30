@@ -1,0 +1,11 @@
+.header {
+  background: var(--color-bg-header);
+  padding: var(--padding-y-x-sm);
+}
+
+.logo-name {
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-md);
+  color: var(--color-nav-link);
+  font-weight: 700;
+}

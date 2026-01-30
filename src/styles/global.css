@@ -31,6 +31,10 @@ body {
   margin-right: auto;
 }
 
+input:focus {
+  outline: none;
+}
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -41,4 +45,11 @@ input[type='number']::-webkit-outer-spin-button {
 
 .centered-block {
   margin: 0 auto;
+}
+
+.fixed-position-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

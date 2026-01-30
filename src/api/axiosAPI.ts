@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const axiosAPI = axios.create({
-  baseURL:
-    'https://js-30-bilim-default-rtdb.europe-west1.firebasedatabase.app/',
+  baseURL: 'https://api.tvmaze.com/',
 });
 
 export default axiosAPI;

@@ -1,8 +1,14 @@
+import { Outlet } from 'react-router-dom';
+import FormTVShow from '../FormTVShow/FormTVShow';
 import './Home.css';
-import React from 'react';
 
 const Home = () => {
-  return <div></div>;
+  return (
+    <div>
+      <FormTVShow />
+      <Outlet />
+    </div>
+  );
 };
 
 export default Home;

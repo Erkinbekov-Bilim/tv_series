@@ -1,20 +1,83 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axiosAPI from '../../../api/axiosAPI';
+import type { RootState } from '../../app/store';
+import type IShowApi from '../../../types/tsShow/showAPI';
+import type IShow from '../../../types/tsShow/show';
 
-interface ITVSeriesState {}
+interface ITVSeriesState {
+  shows: IShowApi[];
+  show: IShow | null;
+  isError: boolean;
+}
 
-const initialState: ITVSeriesState = {};
+const initialState: ITVSeriesState = {
+  shows: [],
+  show: null,
+  isError: false,
+};
 
 export const tvSeriesSlice = createSlice({
   name: 'tvSeries',
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
-    
+    builder.addCase(getSearchTVShows.pending, (state) => {
+      state.isError = false;
+    });
+    builder.addCase(getSearchTVShows.fulfilled, (state, { payload: shows }) => {
+      state.isError = false;
+      state.shows = shows;
+    });
+    builder.addCase(getSearchTVShows.rejected, (state) => {
+      state.isError = true;
+    });
+
+    builder.addCase(getTVShowByQ.pending, (state) => {
+      state.isError = false;
+    });
+    builder.addCase(getTVShowByQ.fulfilled, (state, { payload: show }) => {
+      state.isError = false;
+      state.show = show;
+    });
+    builder.addCase(getTVShowByQ.rejected, (state) => {
+      state.isError = true;
+    });
   },
 });
 
+export const getSearchTVShows = createAsyncThunk<IShowApi[], string>(
+  'tvShows/getSearchTVShows',
+  async (showName) => {
+    if (showName && showName.trim().length > 0) {
+      const response = await axiosAPI.get<IShowApi[]>(
+        `search/shows?q=${showName}`,
+      );
+      const shows: IShowApi[] = response.data;
+
+      return shows;
+    }
+
+    return [];
+  },
+);
+
+export const getTVShowByQ = createAsyncThunk<IShow | null, string>(
+  'tvShows/getTVShowByQ',
+  async (showID) => {
+    if (showID) {
+      const response = await axiosAPI.get<IShow>(`shows/${showID}`);
+      const show: IShow = response.data;
+
+      return show;
+    }
+
+    return null;
+  },
+);
+
+export const selectShows = (state: RootState) => state.tvSeriesReducer.shows;
+export const selectShow = (state: RootState) => state.tvSeriesReducer.show;
+export const selectError = (state: RootState) => state.tvSeriesReducer.isError;
+
 export const tvSeriesReducer = tvSeriesSlice.reducer;
-export const {} = tvSeriesSlice.actions;
