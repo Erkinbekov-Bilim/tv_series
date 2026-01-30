@@ -29,7 +29,7 @@ const FormTVShow = () => {
 
   useEffect(() => {
     dispatch(getSearchTVShows(delayQueryValue));
-  }, [delayQueryValue]);
+  }, [delayQueryValue, dispatch]);
 
   return (
     <>
