@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks/redux';
 import {
   getTVShowByQ,
-  selectError,
   selectShow,
 } from '../../../redux/features/tvSeries/tvSeriesSlice';
 import './TV_Show.css';
@@ -11,7 +10,6 @@ import './TV_Show.css';
 const TV_Show = () => {
   const dispatch = useAppDispatch();
   const show = useAppSelector(selectShow);
-  const error = useAppSelector(selectError);
   const params = useParams<{ idShow: string }>();
   let summery: null | string = null;
 
