@@ -8,12 +8,14 @@ interface ITVSeriesState {
   shows: IShowApi[];
   show: IShow | null;
   isError: boolean;
+  isLoading: boolean;
 }
 
 const initialState: ITVSeriesState = {
   shows: [],
   show: null,
   isError: false,
+  isLoading: false,
 };
 
 export const tvSeriesSlice = createSlice({
@@ -24,24 +26,30 @@ export const tvSeriesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getSearchTVShows.pending, (state) => {
       state.isError = false;
+      state.isLoading = true;
     });
     builder.addCase(getSearchTVShows.fulfilled, (state, { payload: shows }) => {
       state.isError = false;
       state.shows = shows;
+      state.isLoading = false;
     });
     builder.addCase(getSearchTVShows.rejected, (state) => {
       state.isError = true;
+      state.isLoading = false;
     });
 
     builder.addCase(getTVShowByQ.pending, (state) => {
       state.isError = false;
+      state.isLoading = true;
     });
     builder.addCase(getTVShowByQ.fulfilled, (state, { payload: show }) => {
       state.isError = false;
       state.show = show;
+      state.isLoading = false;
     });
     builder.addCase(getTVShowByQ.rejected, (state) => {
       state.isError = true;
+      state.isLoading = false;
     });
   },
 });
@@ -79,5 +87,6 @@ export const getTVShowByQ = createAsyncThunk<IShow | null, string>(
 export const selectShows = (state: RootState) => state.tvSeriesReducer.shows;
 export const selectShow = (state: RootState) => state.tvSeriesReducer.show;
 export const selectError = (state: RootState) => state.tvSeriesReducer.isError;
+export const selectLoading = (state: RootState) => state.tvSeriesReducer.isLoading;
 
 export const tvSeriesReducer = tvSeriesSlice.reducer;
